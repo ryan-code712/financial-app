@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WealthMend</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell" aria-live="polite">
+      <header class="hero card">
+        <div class="brand-row">
+          <span class="app-icon" aria-hidden="true">
+            <span class="leaf leaf-left"></span>
+            <span class="leaf leaf-right"></span>
+          </span>
+          <div>
+            <p class="eyebrow">WealthMend</p>
+            <h1>Budget, Net Worth & Investment Tracking</h1>
+          </div>
+        </div>
+        <p class="subtitle">A unified money dashboard with planning, account tracking, and market movement visibility.</p>
+      </header>
+
+      <section class="card month-summary">
+        <div>
+          <p class="meta">This month</p>
+          <p class="amount" id="monthName">March 2026</p>
+        </div>
+        <div class="income-box">
+          <p>Income</p>
+          <strong id="incomeTotal"></strong>
+        </div>
+      </section>
+
+      <section class="card progress-card">
+        <div class="progress-row">
+          <span>Planned</span>
+          <strong id="plannedTotal"></strong>
+        </div>
+        <div class="bar-track"><div id="plannedBar" class="bar-fill"></div></div>
+        <div class="progress-row muted">
+          <span>Remaining to assign</span>
+          <strong id="remainingTotal"></strong>
+        </div>
+      </section>
+
+      <section class="card segment-card" aria-label="Main sections">
+        <button class="segment-btn active" data-view="plan">Plan</button>
+        <button class="segment-btn" data-view="accounts">Accounts</button>
+        <button class="segment-btn" data-view="activity">Activity</button>
+        <button class="segment-btn" data-view="investments">Investments</button>
+      </section>
+
+      <section id="planView" class="view active-view">
+        <section class="card">
+          <div class="section-title-row">
+            <h2>Monthly Plan</h2>
+            <span id="goalHint" class="tag"></span>
+          </div>
+          <p class="section-subtitle">Give every dollar a job while staying aware of spending trends.</p>
+          <div id="budgetGroups" class="list-stack"></div>
+        </section>
+      </section>
+
+      <section id="accountsView" class="view hidden-view">
+        <section class="card">
+          <h2>Accounts</h2>
+          <p class="section-subtitle">Track cash, cards, and investments in one place.</p>
+          <div id="accountList" class="list-stack"></div>
+        </section>
+      </section>
+
+      <section id="activityView" class="view hidden-view">
+        <section class="card">
+          <h2>Recent Activity</h2>
+          <p class="section-subtitle">See where your money went and what needs attention.</p>
+          <ul id="transactionList" class="activity-list"></ul>
+        </section>
+      </section>
+
+      <section id="investmentsView" class="view hidden-view">
+        <section class="card">
+          <h2>Investment Connections</h2>
+          <p class="section-subtitle">Connect institutions to sync balances and positions.</p>
+          <div class="list-stack" id="connectionList"></div>
+        </section>
+
+        <section class="card">
+          <h2>Net Worth</h2>
+          <div class="networth-row">
+            <div>
+              <p class="meta">Current net worth</p>
+              <p class="amount" id="netWorthValue"></p>
+            </div>
+            <div class="tag" id="netWorthChange"></div>
+          </div>
+
+          <div class="goal-form-row">
+            <input id="goalInput" type="number" min="0" step="500" placeholder="Add net worth goal (e.g. 200000)" />
+            <button id="addGoalBtn" class="small-btn">Add</button>
+          </div>
+
+          <div id="netWorthGoals" class="list-stack"></div>
+        </section>
+
+        <section class="card">
+          <div class="section-title-row">
+            <h2>Investment Performance</h2>
+            <span id="rangeLabel" class="tag">Per day</span>
+          </div>
+
+          <div class="range-picker" role="tablist" aria-label="Investment chart range">
+            <button class="range-btn active" data-range="minute">Per minute</button>
+            <button class="range-btn" data-range="hour">Per hour</button>
+            <button class="range-btn" data-range="day">Per day</button>
+            <button class="range-btn" data-range="4hour">Per 4 hours</button>
+            <button class="range-btn" data-range="5day">Per 5 days</button>
+            <button class="range-btn" data-range="month">Per month</button>
+            <button class="range-btn" data-range="year">Per year</button>
+            <button class="range-btn" data-range="ytd">YTD</button>
+          </div>
+
+          <div class="chart-wrap">
+            <svg id="investChart" viewBox="0 0 320 140" aria-label="Investment performance chart">
+              <path id="chartPath" fill="none" stroke-width="3" stroke-linecap="round"></path>
+            </svg>
+          </div>
+
+          <div class="progress-row">
+            <span>Range change</span>
+            <strong id="rangeChange"></strong>
+          </div>
+        </section>
+      </section>
+
+      <section class="card notifications-card">
+        <h3>Smart notifications</h3>
+        <ul id="notifications"></ul>
+      </section>
+
+      <nav class="bottom-nav" aria-label="Bottom navigation">
+        <button class="bottom-btn active">Budget</button>
+        <button class="bottom-btn">Goals</button>
+        <button class="bottom-btn">Insights</button>
+      </nav>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
